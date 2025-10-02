@@ -6,7 +6,7 @@ This is a knowledge extractor system built with a **simplified Clean Architectur
 
 ## Design Choices and Trade-offs
 
-The code utilizes a **simplified Clean Architecture** to enforce testability and separation of concerns, prioritizing a robust core domain. This setup was fast to implement by leveraging a **project template**. The **asynchronous stack (FastAPI, Aiosqlite)** was chosen for its **best practice performance** and **familiarity**, maximizing API throughput. We use the **OpenRouter** API gateway with the **Grok free tier** to ensure the service is verifiable and runs without cost. The primary **trade-off** was limiting **robust error handling and logging** and automated testing to simple checks, as the **time required to implement comprehensive async tests** would have prevented feature completion. Search uses a **uniform substring match** to minimize implementation time since exact matching wasn't required.
+The code utilizes a **simplified Clean Architecture** to enforce testability and separation of concerns, prioritizing a robust core domain. This setup was fast to implement by leveraging a **project template**. The **asynchronous stack (FastAPI, Aiosqlite)** was chosen for its **best practice performance** and **familiarity**, maximizing API throughput. We use the **OpenRouter** API gateway with the **Grok free tier** to ensure the service is verifiable and runs without cost. The **Knowledge Extractor** was built using simple heuristics to identify noun via stop words. The primary **trade-off** was limiting **robust error handling and logging** and unit testing to simple extractor checks, as the **time required to implement comprehensive async tests** would have prevented feature completion. Search uses a **substring matching** to minimize implementation time since exact matching wasn't required.
 
 ---
 
@@ -60,12 +60,12 @@ curl -X 'POST' \
   'http://localhost:9000/api/analyze' \
   -H 'Content-Type: application/json' \
   -d '{
-  "content": "The Grok model shows significant jump in reasoning capabilities for summarization tasks."
+  "content": "The quick brown fox jumps over the lazy dog. The dog is very lazy."
 }'
 ```
 
 ```bash
 curl -X 'GET' \
-  'http://localhost:9000/api/search?topic=apple' \
+  'http://localhost:9000/api/search?topic=lazy' \
   -H 'Content-Type: application/json'
 ```
